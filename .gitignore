@@ -1,0 +1,20 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.vscode/
+.idea/
+
+# dependencies / build output
+node_modules/
+dist/
+.venv/
+__pycache__/
+
+# local-only working files, kept on disk but never deployed.
+# the web-ready copies of every photo live in assets/img/.
+/photos/
+/reference/
+/.design-taste/

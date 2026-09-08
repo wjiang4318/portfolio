@@ -1,0 +1,1110 @@
+/* ============================================================
+   Wilson Jiang — portfolio
+
+   Sizing follows Framer's model, measured off the reference:
+
+     phone    <= 809.98px
+     tablet   810px – 1199.98px
+     desktop  >= 1200px   container 1200px, inner stack 1152px
+
+   Type is STEPPED per breakpoint (Framer sets fixed px per
+   breakpoint, it does not slide with vw). Every size is in rem
+   off a 16px root, so the whole design can be scaled from one
+   rule if that is ever wanted — see the commented block below.
+   As it stands there is no scaling: the page is pixel-identical
+   to the Framer reference at any width >= 1200px.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Lora:ital,wght@0,400;1,400&family=Instrument+Sans:wght@400;500&display=swap');
+
+/* ---------- root scale ---------- */
+
+html { font-size: 16px; }
+
+/* NOTE: no root scale-up. The design is pixel-identical to the
+   Framer reference at every width >= 1200px, so the two can be
+   compared tab-to-tab. To let it grow on very large displays
+   instead, uncomment the rule below and pick a threshold above
+   your own screen width.
+
+@media (min-width: 2200px) {
+  html { font-size: min(24px, calc(16px + (100vw - 2200px) * 0.005)); }
+}
+*/
+
+/* ---------- tokens ---------- */
+
+:root {
+  --tab-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath d='M0 0H57.6C97.6 0 94 0 144 0C199 0 190.4 120 230.4 120H1440V120H0Z' fill='%23000'/%3E%3C/svg%3E");
+
+  /* colour — warm neutrals only, one accent */
+  --paper:    #FCFAF8;
+  --paper-2:  #F4F1F2;
+  --ink:      #1C1916;
+  --ink-2:    #2B2522;
+  --ink-3:    #0C0A08;
+  /* text is black throughout — hierarchy comes from size, weight and
+     italics rather than tone. Only the rail's role titles are blue. */
+  --text:     #1C1916;
+  --muted:    #1C1916;
+  --line:     #E8E4E3;
+  --line-2:   #D8D2D0;
+  --clay:     #BBAD9E;
+  /* sampled from the reference resume; 7.1:1 on --paper, so it is safe
+     for text and not only for decoration */
+  --blue:      #234DBD;
+  --blue-soft: color-mix(in srgb, var(--blue) 26%, var(--paper));
+  --blue-wash: color-mix(in srgb, var(--blue) 8%, var(--paper));
+
+  --serif: 'Lora', 'Times New Roman', Times, serif;
+  --sans:  'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --script: 'Allura', 'Brush Script MT', cursive;
+
+  /* container: 1200px outer, 1152px inner — Framer's desktop stack */
+  --shell: 75rem;
+  --gutter: 1.5rem;
+  --section-y: 9rem;
+  --head-col: 12.5rem;   /* left eyebrow column in section headers */
+
+  /* type — desktop step */
+  --fs-script: 4.25rem;  --lh-script: 1.1;
+  --fs-giant: 9rem;      --lh-giant: 0.86;  --ls-giant: -0.075em;
+  --fs-h1:    4rem;      --lh-h1:    1.0625;
+  --fs-h2:    3.5rem;    --lh-h2:    1.14;
+  --fs-h3:    1.5rem;    --lh-h3:    2.125rem;
+  --fs-card:  2.25rem;   --lh-card:  2.75rem;   /* work-panel title: Lora 36/44 */
+  --fs-lede:  1.125rem;  --lh-lede:  1.75rem;
+  --fs-body:  1rem;      --lh-body:  1.5rem;
+  --fs-small: 0.875rem;  --lh-small: 1.25rem;
+  --fs-eyebrow: 0.75rem; --lh-eyebrow: 1.125rem;
+
+  --r-sm: 0.5rem;
+  --r-md: 1rem;
+  --r-lg: 1.5rem;
+  --r-pill: 999px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- tablet: 810 – 1199.98 ---------- */
+@media (max-width: 1199.98px) {
+  :root {
+    --gutter: 2.5rem;
+    --section-y: 6rem;
+    --head-col: 9rem;
+    --fs-script: 3.25rem;
+    --fs-giant: 6rem;
+    --fs-h1:    3rem;    --lh-h1: 1.08;
+    --fs-h2:    2.5rem;  --lh-h2: 1.15;
+    --fs-h3:    1.375rem; --lh-h3: 1.875rem;
+    --fs-card:  1.875rem; --lh-card: 2.375rem;
+    --fs-lede:  1.0625rem; --lh-lede: 1.625rem;
+  }
+}
+
+/* ---------- phone: <= 809.98 ---------- */
+@media (max-width: 809.98px) {
+  :root {
+    --gutter: 1.25rem;
+    --section-y: 4.5rem;
+    --fs-script: 2.5rem;
+    --fs-giant: 3.5rem;
+    --fs-h1:    2.25rem; --lh-h1: 1.1;
+    --fs-h2:    1.875rem; --lh-h2: 1.2;
+    --fs-h3:    1.25rem;  --lh-h3: 1.75rem;
+    --fs-card:  1.5rem;   --lh-card: 2rem;
+    --fs-lede:  1rem;     --lh-lede: 1.5625rem;
+    --fs-body:  0.9375rem; --lh-body: 1.4375rem;
+  }
+}
+
+/* ============================================================
+   base
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -0.02em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--blue); color: var(--paper); }
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- layout primitives ---------- */
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section { padding-block: var(--section-y); }
+.section--tight { padding-block: calc(var(--section-y) * 0.55); }
+.rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
+
+/* ---------- shared type ---------- */
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  line-height: var(--lh-eyebrow);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); letter-spacing: -0.02em; }
+h2 { font-size: var(--fs-h2); line-height: var(--lh-h2); letter-spacing: -0.02em; }
+h3 { font-size: var(--fs-h3); line-height: var(--lh-h3); letter-spacing: -0.02em; }
+
+.accent { font-style: italic; color: var(--clay); }
+
+.lede {
+  font-size: var(--fs-lede);
+  line-height: var(--lh-lede);
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0;
+  max-width: 46ch;
+}
+
+/* Section heads are plain resume-style labels — the display serif does
+   its work in the hero, the work panels and the role names instead. */
+.section-head {
+  display: grid;
+  gap: 0.875rem;
+  margin-bottom: 3rem;
+  max-width: 46rem;
+}
+.section-label {
+  font-family: var(--script);
+  font-size: var(--fs-script);
+  line-height: var(--lh-script);
+  font-weight: 400;
+  letter-spacing: 0;      /* tracking mangles a connected script */
+  text-transform: none;
+  color: var(--ink);
+  margin: 0;
+}
+
+@media (max-width: 809.98px) { .section-head { margin-bottom: 2rem; } }
+
+/* ---------- buttons ---------- */
+
+/* Measured off the reference: 48px tall, 14/22 padding, 8px radius
+   (not a pill), Instrument Sans 14/20 w500 at -0.14px. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8125rem 1.375rem;   /* 13/22 + 1px border = 48px tall */
+  border-radius: var(--r-sm);
+  font-family: var(--sans);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  line-height: var(--lh-small);
+  letter-spacing: -0.01em;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background .35s var(--ease), color .35s var(--ease),
+              border-color .35s var(--ease), transform .35s var(--ease);
+}
+/* nav button is the compact variant: 36px tall, 8/16 padding */
+.btn--sm { padding: 0.4375rem 0.9375rem; gap: 0.5rem; }   /* 36px tall */
+.btn--solid { background: var(--ink); color: var(--paper); }
+.btn--solid:hover { background: var(--ink-3); transform: translateY(-1px); }
+.btn--ghost { border-color: var(--line-2); color: var(--ink); background: transparent; gap: 0.5rem; }
+.btn--ghost:hover { border-color: var(--ink); transform: translateY(-1px); }
+.btn__arrow { width: 0.75rem; height: 0.75rem; transition: transform .35s var(--ease); }
+.btn:hover .btn__arrow { transform: translate(2px, -2px); }
+
+/* ---------- nav ---------- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s var(--ease);
+}
+.nav[data-scrolled="true"] { border-bottom-color: var(--line); }
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  height: 5.25rem;   /* 84px — the reference's nav bar */
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.brand__mark { width: 1.125rem; height: 1.125rem; flex: none; }
+
+.nav__links {
+  display: flex;
+  gap: 1.875rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.nav__links a { color: var(--ink); position: relative; padding-bottom: 0.375rem; }
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--blue);
+  transform: translate(-50%, 4px) scale(0);
+  transition: transform .3s var(--ease);
+}
+.nav__links a:hover,
+.nav__links a[aria-current="true"] { color: var(--ink); }
+.nav__links a[aria-current="true"]::after { transform: translate(-50%, 4px) scale(1); }
+
+@media (max-width: 1199.98px) { .nav__links { gap: 1.25rem; } }
+@media (max-width: 809.98px)  { .nav__links { display: none; } }
+
+/* ---------- hero ---------- */
+
+.hero { padding-block: 3rem; }   /* 48px, measured */
+
+/* Measured off the reference at desktop: portrait is 544 x 466 (a
+   LANDSCAPE box, not a portrait one), 16px radius, clay backing,
+   flush to the right edge of the 1152 content column. */
+.hero__grid {
+  display: grid;
+  /* portrait track scales continuously with the viewport (and zoom)
+     between ~19rem and its measured 34rem, so there's no hard jump
+     at a breakpoint — the copy column takes whatever's left */
+  grid-template-columns: minmax(0, 1fr) clamp(19rem, 34vw, 34rem);
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero__copy { display: grid; gap: 1.5rem; justify-items: start; }
+.hero__actions { margin-top: 1rem; }
+
+/* the stack and the primary action share a row: chips flow first and
+   the button sits at the end of them, wrapping to its own line only
+   when there is genuinely no space */
+.hero__toolkit {
+  /* button anchors the left edge, chips flow to its right */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.hero__toolkit .btn { flex: none; }
+/* the hero chips run tighter than the section ones so all six clear
+   the 366px left beside the button, on one line */
+.chips--hero { flex: 1 1 auto; min-width: 0; max-width: none; gap: 0.3125rem; }
+.hero__toolkit .chips--hero li { padding: 0.3125rem 0.5rem; }   /* beats the later .chips li rule */
+
+/* below desktop the copy column is too narrow to seat the button and
+   all six chips on one row, so the chips take a full-width line of
+   their own rather than stranding the last one */
+@media (max-width: 1199.98px) {
+  .hero__toolkit { flex-wrap: wrap; align-items: flex-start; gap: 1rem; }
+  .chips--hero { flex: 1 1 100%; }
+}
+
+.hero h1 { max-width: 31.25rem; }   /* 500px, the reference's h1 measure */
+.hero__sub { color: var(--muted); font-size: var(--fs-body); margin: -0.5rem 0 0; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 0.625rem; }
+
+.hero__portrait {
+  /* the copy column is now shorter than the image, so plain centring
+     lines the text up with the middle of the portrait */
+  border-radius: var(--r-md);
+  overflow: hidden;
+  /* the portrait is a transparent cutout, so the panel IS the
+     backdrop — no colour matching, and this is the template's
+     exact clay. */
+  background: var(--clay);
+  aspect-ratio: 544 / 466;
+}
+/* The source is a tight 3:4 headshot and the frame is 544x466
+   landscape, so filling it edge to edge crops in hard. Inset the
+   image and let the clay panel show at the sides: the crop keeps
+   ~80% of the photo's height instead of ~64%. */
+.hero__portrait img {
+  /* the asset is exported at the panel's own 544:466 ratio with the
+     figure bottom-flush and ~9% headroom baked in, so it drops
+     straight in with no cropping */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 100%;
+}
+
+@media (max-width: 1199.98px) {
+  .hero { padding-block: 3.5rem 4.5rem; }
+}
+@media (max-width: 809.98px) {
+  .hero__grid { grid-template-columns: 1fr; gap: 2rem; }
+  .hero__portrait { order: -1; aspect-ratio: 4 / 3; }
+}
+
+/* ---------- work ---------- */
+
+/* Measured off the template's projects page: three equal columns, 16px
+   gap, 4:3 image at 8px radius, 6px down to the title. Its cards are
+   251px wide only because a category sidebar takes the rest; with no
+   sidebar ours come out at 373px, so the type is scaled to keep the
+   template's proportion (title ~6.4% of card width) instead of leaving
+   16px text on a card half again as large. */
+
+.work__grid {
+  display: grid;
+  /* column count follows the space available, not fixed breakpoints:
+     3-up on desktop, 2-up mid, 1-up narrow — reflows the same at any zoom */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
+  gap: 2rem 1rem;
+}
+
+.card { display: grid; gap: 0.375rem; align-content: start; }
+
+.card__art {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--clay) 55%, var(--line));
+  display: grid;
+  place-items: center;
+}
+.card__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .7s var(--ease);
+}
+.card:hover .card__art img { transform: scale(1.04); }
+
+/* placeholder until the artwork exists — the project number, set in
+   the same serif as the titles */
+.card__art[data-num]::after {
+  content: attr(data-num);
+  font-family: var(--serif);
+  font-size: 3.5rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: color-mix(in srgb, var(--paper) 46%, transparent);
+}
+.card__art:has(img)::after { content: none; }
+
+.card__title {
+  font-family: var(--serif);
+  font-size: var(--fs-h3);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-top: 0.375rem;
+  border-bottom: 1px solid transparent;
+  justify-self: start;
+  transition: border-color .3s var(--ease);
+}
+.card:hover .card__title { border-bottom-color: var(--ink); }
+
+/* same face as the title above it — Lora at 400, since that is the only
+   weight loaded and 500 would be faux-bolded by the browser */
+.card__kind {
+  font-family: var(--serif);
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+}
+
+@media (max-width: 809.98px)  { .work__grid { gap: 2rem; } }
+
+/* ---------- chips ---------- */
+
+.chips { display: flex; flex-wrap: wrap; gap: 0.4375rem; list-style: none; margin: 0; padding: 0; }
+.chips--certs { gap: 0.375rem 1.25rem; }
+.chips--certs a {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  border-bottom: 1px solid var(--line-2);
+  padding-bottom: 1px;
+  transition: border-color .3s var(--ease);
+}
+.chips--certs a:hover { border-bottom-color: var(--blue); }
+
+.chips li {
+  padding: 0.3125rem 0.75rem;
+  border-radius: var(--r-pill);
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  font-size: var(--fs-eyebrow);
+  line-height: var(--lh-eyebrow);
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* credentials are links, not tool tags: the names are long and read badly
+   as pills, and they need to look clickable */
+/* hero credentials: the certificates for the stack listed just above,
+   set as links rather than pills — the names are sentences, not tags */
+.hero__certs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.375rem 1.125rem;
+  margin: 1.125rem 0 0;
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+}
+.hero__certs-label {
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero__certs a {
+  border-bottom: 1px solid var(--line-2);
+  padding-bottom: 1px;
+  transition: border-color .3s var(--ease);
+}
+.hero__certs a:hover { border-bottom-color: var(--blue); }
+
+/* ---------- experience rail ---------- */
+
+/* A single continuous hairline runs down the left of the whole list,
+   with each entry hung off it: date in one column, role and detail in
+   the next. */
+.rail {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1.75rem;
+  /* decorative inset from the section label; scales with the viewport
+     (and zoom) instead of stepping down at a breakpoint */
+  margin-left: clamp(2rem, 4vw, 3.5rem);
+  border-left: 1.5px solid var(--blue-soft);
+  display: grid;
+  gap: 2.75rem;
+}
+
+.rail__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 11.5rem 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* the tick where each entry meets the rail */
+.rail__item::before {
+  content: '';
+  position: absolute;
+  left: -1.75rem;
+  top: 0.6rem;
+  width: 0.75rem;
+  height: 1.5px;
+  background: var(--blue-soft);
+}
+
+.rail__date {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.rail__body { display: grid; gap: 0.25rem; }
+
+.rail__role {
+  font-family: var(--serif);
+  font-size: var(--fs-h3);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--blue);
+  margin: 0;
+}
+.rail__org {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  font-style: italic;
+  color: var(--muted);
+}
+
+/* one paragraph per role reads better than résumé bullets — the résumé
+   itself is linked, so repeating its format adds nothing */
+.rail__note {
+  margin: 0.75rem 0 0;
+  max-width: 58ch;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.rail__points {
+  margin: 0.625rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.4375rem;
+  max-width: 54ch;
+}
+.rail__points li {
+  position: relative;
+  padding-left: 0.875rem;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text);
+}
+/* sub-roles inside a grouped entry (the Hamilton stops) */
+.rail__points em { font-style: italic; color: var(--ink); }
+
+.rail__points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 4px;
+  height: 1px;
+  background: var(--line-2);
+}
+
+@media (max-width: 809.98px) {
+  .rail { padding-left: 1.25rem; margin-left: 0; gap: 2rem; }
+  .rail__item { grid-template-columns: 1fr; gap: 0.375rem; }
+  .rail__item::before { left: -1.25rem; }
+}
+
+/* ---------- about ---------- */
+
+/* Full-bleed band with a folder tab on its top-left and the mirrored
+   closing block on its bottom-right. The shape is the reference's own
+   path, used as a MASK rather than a filled SVG so the colour still
+   comes from --clay and stays in one place. */
+.band {
+  --tab-h: 3rem;
+  --tab-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath d='M0 0H57.6C97.6 0 94 0 144 0C199 0 190.4 120 230.4 120H1440V120H0Z' fill='%23000'/%3E%3C/svg%3E");
+  position: relative;
+  margin-block: var(--tab-h);
+  background: var(--clay);
+}
+.band::before,
+.band::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--tab-h);
+  background: var(--clay);
+  -webkit-mask: var(--tab-shape) 0 0 / 100% 100% no-repeat;
+          mask: var(--tab-shape) 0 0 / 100% 100% no-repeat;
+}
+.band::before { top: calc(-1 * var(--tab-h)); }
+/* the closing block is the same shape turned around */
+.band::after  { bottom: calc(-1 * var(--tab-h)); transform: rotate(180deg); }
+
+.about__grid {
+  display: grid;
+  /* flexible photo column: the two-column layout holds together as the
+     viewport (or zoom) narrows, instead of snapping to one column */
+  grid-template-columns: minmax(0, 1fr) clamp(17rem, 22vw, 21rem);
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: start;
+}
+.about__copy { display: grid; gap: 1.25rem; justify-items: start; }
+.about__copy p { margin: 0; font-size: var(--fs-lede); line-height: var(--lh-lede); color: var(--text); }
+.about__copy .btn { margin-top: 0.75rem; }
+/* the ghost button needs a real edge against the clay */
+.band .btn--ghost { border-color: color-mix(in srgb, var(--ink) 28%, transparent); }
+.band .btn--ghost:hover { border-color: var(--ink); }
+
+@media (max-width: 809.98px) {
+  .about__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  /* once stacked, the deck shouldn't cling to the right edge */
+  .deck { justify-self: start; }
+  .band { --tab-h: 2rem; }
+}
+
+
+/* ---------- stamp deck ---------- */
+
+/* Collapsed it is a pile: three stamps stacked and fanned, the rest
+   out of the flow. Open it becomes the full multi-column scatter. */
+
+.deck { position: relative; display: grid; justify-items: start; gap: 1.5rem; justify-self: end; }
+
+.collage { transition: none; }
+
+/* --- open --- */
+.collage[data-open="true"] {
+  columns: 2;
+  column-gap: 1.5rem;
+}
+.collage[data-open="true"] .stamp {
+  animation: stamp-in .5s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+@keyframes stamp-in { from { opacity: 0; transform: translateY(10px) scale(.97); } }
+
+/* --- collapsed --- */
+.collage[data-open="false"] {
+  position: relative;
+  width: 17rem;
+  height: 20rem;
+}
+.collage[data-open="false"] .stamp {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 15rem;
+  margin: 0;
+}
+.collage[data-open="false"] .stamp:nth-child(1) { transform: rotate(-3deg);                        z-index: 3; }
+.collage[data-open="false"] .stamp:nth-child(2) { transform: rotate(4deg)  translate(12px, 6px);   z-index: 2; }
+.collage[data-open="false"] .stamp:nth-child(3) { transform: rotate(9deg)  translate(24px, 12px);  z-index: 1; }
+.collage[data-open="false"] .stamp:nth-child(n+4) { display: none; }
+/* a pile only reads as a pile if the cards are the same size, so the
+   mixed portrait/landscape ratios get a square crop while stacked —
+   they return to their true shape once it opens */
+.collage[data-open="false"] .stamp picture { aspect-ratio: 1 / 1; }
+.collage[data-open="false"] .stamp img { height: 100%; object-fit: cover; }
+/* the closed pile is a photo, not a labelled stamp — captions return
+   inside the gallery window */
+.collage[data-open="false"] figcaption { display: none; }
+
+/* the pile breathes when you approach it */
+.deck:hover .collage[data-open="false"] .stamp:nth-child(1) { transform: rotate(-5deg) translate(-6px, -3px); }
+.deck:hover .collage[data-open="false"] .stamp:nth-child(2) { transform: rotate(7deg)  translate(22px, 8px); }
+.deck:hover .collage[data-open="false"] .stamp:nth-child(3) { transform: rotate(14deg) translate(44px, 18px); }
+
+/* --- the stamp itself --- */
+
+.stamp {
+  break-inside: avoid;
+  margin: 0 0 1.75rem;
+  transition: transform .45s var(--ease);
+}
+
+/* only the photo gets the frame — the caption sits outside it, or the
+   perforations would run straight through the text */
+.stamp__photo {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0.625rem;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  /* the shadow has to be a filter, not box-shadow: box-shadow would
+     trace the element's rectangle and ignore the punched perforations */
+  filter: drop-shadow(0 6px 14px rgba(28, 25, 22, 0.18));
+}
+
+/* The white frame is a masked pseudo-element sitting BEHIND the photo.
+   The mask punches a grid of holes across the whole rectangle, but the
+   photo covers the interior — so only the holes along the edge survive,
+   which is exactly a stamp's perforation. */
+.stamp__photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #FFFDFB;
+  --r: 5px;
+  --tile: calc(3 * var(--r));
+  --perf: radial-gradient(var(--r) at 50% 50%, #0000 97%, #000);
+  -webkit-mask: var(--perf) round calc(-1.5 * var(--r)) calc(-1.5 * var(--r)) / var(--tile) var(--tile);
+          mask: var(--perf) round calc(-1.5 * var(--r)) calc(-1.5 * var(--r)) / var(--tile) var(--tile);
+}
+
+.stamp picture {
+  position: relative;
+  display: block;
+  background: var(--paper-2);   /* a not-yet-loaded photo reads as a
+                                   blank stamp, not a bare dot grid */
+}
+.stamp img { position: relative; display: block; width: 100%; }
+
+.stamp figcaption {
+  margin-top: 0.75rem;
+  padding-inline: 0.625rem;
+  font-size: var(--fs-eyebrow);
+  line-height: var(--lh-eyebrow);
+  color: var(--ink);
+  transition: opacity .35s var(--ease);
+}
+
+/* scattered angles once the pile is open — scrapbook, not gallery */
+.collage[data-open="true"] .stamp:nth-child(1) { transform: rotate(-2.5deg); }
+.collage[data-open="true"] .stamp:nth-child(2) { transform: rotate(1.8deg); }
+.collage[data-open="true"] .stamp:nth-child(3) { transform: rotate(2.6deg); }
+.collage[data-open="true"] .stamp:nth-child(4) { transform: rotate(-1.6deg); }
+.collage[data-open="true"] .stamp:nth-child(5) { transform: rotate(-3deg); }
+.collage[data-open="true"] .stamp:nth-child(6) { transform: rotate(2deg); }
+.collage[data-open="true"] .stamp:nth-child(7) { transform: rotate(-2deg); }
+.collage[data-open="true"] .stamp:nth-child(8) { transform: rotate(3deg); }
+.collage[data-open="true"] .stamp:hover { transform: rotate(0deg) scale(1.03); z-index: 2; }
+
+/* --- the toggle --- */
+
+.deck__toggle {
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color .35s var(--ease);
+}
+.deck__toggle:hover { color: var(--ink); }
+.deck__toggle span:first-child { border-bottom: 1px solid var(--line-2); padding-bottom: 2px; }
+.deck__arrow { transition: transform .35s var(--ease); }
+.deck__toggle:hover .deck__arrow { transform: translateX(3px); }
+
+/* --- modal window (shared by the travel gallery and case studies) --- */
+
+.window {
+  width: min(94vw, 68rem);
+  max-width: none;
+  height: min(92vh, 56rem);
+  max-height: none;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-md);
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+}
+.window::backdrop { background: rgba(12, 10, 8, 0.7); backdrop-filter: blur(4px); }
+
+.window__bar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 1.75rem;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.window__close, .viewer__back {
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  font-weight: 500;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color .3s var(--ease);
+}
+.window__close:hover, .viewer__back:hover { color: var(--ink); }
+
+.window__body {
+  height: calc(100% - 4.5rem);
+  overflow-y: auto;
+  padding: 2rem 1.75rem 2.5rem;
+}
+/* inside the window the collage gets more columns than the page had */
+.window__body .collage[data-open="true"] { columns: 3; column-gap: 1.5rem; }
+
+/* --- case study, inside the same window --- */
+
+/* Built from components the page already has: the folder tab from the
+   About band, and the Experience rail for the facts. Nothing here is a
+   modal-only invention, which is what stopped it reading as part of
+   the site. */
+
+.window__body[data-case-slot] { padding: 0; }
+.case { display: block; }
+
+/* --- masthead: the folder, opened --- */
+
+.case__masthead {
+  position: relative;
+  z-index: 1;
+  background: var(--clay);
+  padding: clamp(2.5rem, 5vw, 4rem) var(--case-x) clamp(2.5rem, 4vw, 3.25rem);
+  --case-x: clamp(1.75rem, 6vw, 5rem);
+}
+/* the same closing curve the About band uses, so the two rhyme */
+.case__masthead::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(-1 * var(--case-tab));
+  height: var(--case-tab);
+  --case-tab: 2rem;
+  background: var(--clay);
+  -webkit-mask: var(--tab-shape) 0 0 / 100% 100% no-repeat;
+          mask: var(--tab-shape) 0 0 / 100% 100% no-repeat;
+  transform: rotate(180deg);
+}
+
+.case__eyebrow {
+  margin: 0 0 1rem;
+  font-size: var(--fs-eyebrow);
+  line-height: var(--lh-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 68%, transparent);
+}
+.case__title {
+  font-family: var(--serif);
+  font-size: var(--fs-h2);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  margin: 0;
+  max-width: 18ch;
+}
+.case__lede {
+  margin: 1.5rem 0 0;
+  max-width: 46ch;
+  font-size: var(--fs-lede);
+  line-height: var(--lh-lede);
+  color: color-mix(in srgb, var(--ink) 82%, transparent);
+}
+
+/* --- body --- */
+
+.case__body {
+  --case-x: clamp(1.75rem, 6vw, 5rem);
+  padding: 4rem var(--case-x) clamp(3rem, 6vw, 5rem);
+}
+
+/* facts reuse the Experience rail rather than a bordered table */
+.case__facts { margin: 0 0 3.5rem; gap: 1.5rem; }
+.case__facts .rail__item { grid-template-columns: 9rem 1fr; gap: 1.5rem; }
+.case__fact { margin: 0; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text); }
+
+/* subheads hang in a left gutter so the prose runs as a real column */
+.case__section {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2.75rem;
+}
+.case__section h3 {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: var(--fs-eyebrow);
+  line-height: 1.9;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.case__prose { display: grid; gap: 1.125rem; max-width: 62ch; }
+.case__prose a { border-bottom: 1px solid var(--line-2); transition: border-color .3s var(--ease); }
+.case__prose a:hover { border-bottom-color: var(--blue); }
+.case__prose p { margin: 0; font-size: var(--fs-body); line-height: 1.7; color: var(--text); }
+
+/* one line of the writing, given room to land */
+.case__quote {
+  margin: 3.25rem 0 3.25rem 10.5rem;
+  padding: 0;
+  max-width: 26ch;
+  font-family: var(--serif);
+  font-size: var(--fs-h3);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.case__quote::before { content: '“'; }
+.case__quote::after  { content: '”'; }
+
+@media (max-width: 809.98px) {
+  .case__section { grid-template-columns: 1fr; gap: 0.75rem; }
+  .case__facts .rail__item { grid-template-columns: 1fr; gap: 0.25rem; }
+  .case__quote { margin-left: 0; }
+  .case__body { padding-top: 2.75rem; }
+}
+
+/* closing note — sits in the prose column, not the gutter */
+.case__footnote {
+  margin: 0.5rem 0 0 10.5rem;
+  max-width: 62ch;
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  color: var(--muted);
+  font-style: italic;
+}
+@media (max-width: 809.98px) { .case__footnote { margin-left: 0; } }
+
+/* --- single-photo view, inside the same window --- */
+
+.viewer {
+  height: calc(100% - 4.5rem);
+  margin: 0;
+  padding: 1.25rem 1.75rem 2rem;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  justify-items: center;
+  gap: 1rem;
+}
+.viewer__back { justify-self: start; }
+.viewer img {
+  min-height: 0;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+  border-radius: var(--r-sm);
+  background: var(--paper-2);
+}
+.viewer figcaption {
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  color: var(--ink);
+}
+
+@media (max-width: 1199.98px) { .window__body .collage[data-open="true"] { columns: 2; } }
+@media (max-width: 809.98px) {
+  .window { width: 100vw; height: 100vh; border-radius: 0; }
+  .window__body { padding: 1.5rem 1.25rem 2rem; }
+  .window__body .collage[data-open="true"] { columns: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp, .collage[data-open="false"] .stamp, .deck__arrow { transition: none; }
+  .collage[data-open="true"] .stamp { animation: none; }
+}
+
+
+/* ---------- contact ---------- */
+
+.contact { text-align: center; }
+.contact__inner { display: grid; gap: 1.375rem; justify-items: center; }
+.contact h2 { max-width: 16ch; }
+.contact .lede { text-align: center; max-width: 50ch; }
+
+/* Rows are filled cards rather than hairline-separated, and narrower
+   than the content column so they read as a list of handles, not a
+   full-width table. */
+.contact__rows {
+  margin-top: 3rem;
+  display: grid;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 34rem;
+  margin-inline: auto;
+  text-align: left;
+}
+.contact__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.0625rem 1.375rem;
+  border-radius: var(--r-md);
+  background: var(--paper-2);
+  transition: background .3s var(--ease), color .3s var(--ease);
+}
+.contact__row:hover { background: var(--blue-wash); }
+.contact__label {
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  font-weight: 500;
+  color: var(--muted);
+}
+/* the visible text is the short handle; the href carries the real URL */
+.contact__value {
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  text-align: right;
+  word-break: break-word;
+}
+.contact__row:hover .contact__value { color: var(--blue); }
+
+@media (max-width: 809.98px) {
+  .contact__row { flex-direction: column; align-items: flex-start; gap: 0.25rem; padding: 0.875rem 1rem; }
+  .contact__value { text-align: left; }
+}
+
+/* ---------- footer ---------- */
+
+.footer { padding-block: 2.25rem 2.75rem; border-top: 1px solid var(--line); }
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem 1.75rem;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  color: var(--muted);
+}
+.footer a:hover { color: var(--ink); }
+
+/* ---------- scroll reveal ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(1.125rem);
+    transition: opacity .8s var(--ease), transform .8s var(--ease);
+    transition-delay: var(--delay, 0ms);
+  }
+  [data-reveal].is-in { opacity: 1; transform: none; }
+}
+
+/* draft copy that must not ship silently */
+.draft { background: color-mix(in srgb, var(--clay) 34%, transparent); padding: 0 .18em; border-radius: 3px; }
+

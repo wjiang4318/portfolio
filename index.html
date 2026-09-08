@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wilson Jiang — Data Engineer &amp; Analyst</title>
+<meta name="description" content="Wilson Jiang — data engineering and analytics in New York. Pipelines with rigor, questions with curiosity.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ============ nav ============ -->
+<header class="nav" id="nav">
+  <div class="shell nav__inner">
+    <a class="brand" href="#top">
+      <svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 1v22M1 12h22M4.2 4.2l15.6 15.6M19.8 4.2L4.2 19.8" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
+      Wilson Jiang
+    </a>
+    <nav aria-label="Sections">
+      <ul class="nav__links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#work">Work</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--solid btn--sm" href="#contact">Let's talk</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ hero ============ -->
+<section class="shell hero">
+  <div class="hero__grid">
+    <div class="hero__copy">
+      <h1 data-reveal>Hi, I'm <em class="accent">Wilson</em> — A Data Engineer &amp; Analyst</h1>
+      <div class="hero__toolkit" data-reveal style="--delay:120ms">
+        <a class="btn btn--solid" href="#work">View my work
+          <svg class="btn__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 10L10 2M10 2H3.5M10 2v6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <ul class="chips chips--hero">
+          <li>sql</li><li>power bi</li><li>python</li>
+          <li>pyspark</li><li>databricks</li><li>azure</li>
+        </ul>
+      </div>
+
+      <p class="hero__certs" data-reveal style="--delay:180ms">
+        <span class="hero__certs-label">Certified</span>
+        <a href="https://credentials.databricks.com/ce47d9d1-f88f-4c69-bab7-bb962d5ff165" target="_blank" rel="noopener">Databricks — ML Engineer Associate</a>
+        <a href="https://www.credly.com/badges/df511f74-4f1e-4449-9aef-73c2d4eac7bb/linked_in_profile" target="_blank" rel="noopener">Starburst — Deployment Expert</a>
+        <a href="https://www.credly.com/badges/253107b5-133f-4100-90e3-af0cdc918a8d/linked_in_profile" target="_blank" rel="noopener">Alteryx — Designer Core</a>
+      </p>
+    </div>
+    <div class="hero__portrait" data-reveal style="--delay:120ms">
+      <picture>
+        <source type="image/webp" srcset="assets/img/portrait/wilson-sm.webp 560w, assets/img/portrait/wilson-lg.webp 1088w" sizes="(max-width: 809px) 100vw, 544px">
+        <img src="assets/img/portrait/wilson-lg.png" alt="Wilson Jiang" width="1088" height="932" fetchpriority="high">
+      </picture>
+    </div>
+  </div>
+</section>
+
+<div class="shell"><hr class="rule"></div>
+
+<!-- ============ about ============ -->
+<section class="band" id="about">
+  <div class="shell section">
+    <div class="section-head" data-reveal>
+      <h2 class="section-label">About Me</h2>
+    </div>
+
+  <div class="about__grid">
+    <div class="about__copy" data-reveal>
+      <p>Hi, I'm Wilson. I'm an early-career data engineer from New York City. Most recently I was a Data Engineering &amp; AI Associate at Kubrick Group, building data and AI systems for clients. I graduated from Hamilton College with a degree in economics and a minor in statistics.</p>
+      <p>My background taught me the value of asking questions, which is why I like to understand the business need before getting lost in the infrastructure. It's also why I'm comfortable sitting between executives and engineers, since I understand incentives well enough to translate one side to the other. (Don't worry, I still care about the infrastructure. Someone has to! 😅)</p>
+      <p>Outside of academia and work, I enjoy playing volleyball, traveling whenever I can, and biking. Fun fact: I'm in the top 1% of Citibike riders in New York City, having visited over 170 stations 💪.</p>
+      <a class="btn btn--ghost" href="assets/resume.pdf" target="_blank" rel="noopener">Résumé (PDF)
+        <svg class="btn__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 10L10 2M10 2H3.5M10 2v6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+    </div>
+
+    <div class="deck" data-deck data-reveal style="--delay:100ms">
+    <div class="collage" data-open="false">
+      <figure class="stamp">
+        <button class="stamp__photo" type="button" data-full="assets/img/travel/paris-lg.webp" data-caption="baguette, nom nom">
+          <picture>
+            <source type="image/webp" srcset="assets/img/travel/paris-sm.webp 900w, assets/img/travel/paris-lg.webp 1800w" sizes="(max-width: 809px) 90vw, 260px">
+            <img src="assets/img/travel/paris-lg.jpg" alt="baguette, nom nom" loading="lazy" decoding="async">
+          </picture>
+        </button>
+        <figcaption>baguette, nom nom</figcaption>
+      </figure>
+      <figure class="stamp">
+        <button class="stamp__photo" type="button" data-full="assets/img/travel/moher-lg.webp" data-caption="cliffs of moher, ireland!">
+          <picture>
+            <source type="image/webp" srcset="assets/img/travel/moher-sm.webp 900w, assets/img/travel/moher-lg.webp 1800w" sizes="(max-width: 809px) 90vw, 260px">
+            <img src="assets/img/travel/moher-lg.jpg" alt="cliffs of moher, ireland!" loading="lazy" decoding="async">
+          </picture>
+        </button>
+        <figcaption>cliffs of moher, ireland!</figcaption>
+      </figure>
+      <figure class="stamp">
+        <button class="stamp__photo" type="button" data-full="assets/img/travel/morocco-lg.webp" data-caption="Apparently, they're dromedaries, not camels">
+          <picture>
+            <source type="image/webp" srcset="assets/img/travel/morocco-sm.webp 900w, assets/img/travel/morocco-lg.webp 1800w" sizes="(max-width: 809px) 90vw, 260px">
+            <img src="assets/img/travel/morocco-lg.jpg" alt="dromedaries, not camels" loading="lazy" decoding="async">
+          </picture>
+        </button>
+        <figcaption>Apparently, they're dromedaries, not camels</figcaption>
+      </figure>
+      <figure class="stamp">
+        <button class="stamp__photo" type="button" data-full="assets/img/travel/como-lg.webp" data-caption="lake como, ruined the hudson for me">
+          <picture>
+            <source type="image/webp" srcset="assets/img/travel/como-sm.webp 900w, assets/img/travel/como-lg.webp 1800w" sizes="(max-width: 809px) 90vw, 260px">
+            <img src="assets/img/travel/como-lg.jpg" alt="lake como, ruined the hudson for me" loading="lazy" decoding="async">
+          </picture>
+        </button>
+        <figcaption>lake como, ruined the hudson for me</figcaption>
+      </figure>
+      <figure class="stamp">
+        <button class="stamp__photo" type="button" data-full="assets/img/travel/athens-lg.webp" data-caption="say cheese! the acropolis">
+          <picture>
+            <source type="image/webp" srcset="assets/img/travel/athens-sm.webp 900w, assets/img/travel/athens-lg.webp 1800w" sizes="(max-width: 809px) 90vw, 260px">
+            <img src="assets/img/travel/athens-lg.jpg" alt="say cheese! the acropolis" loading="lazy" decoding="async">
+          </picture>
+        </button>
+        <figcaption>say cheese! the acropolis</figcaption>
+      </figure>
+      <figure class="stamp">
+        <button class="stamp__photo" type="button" data-full="assets/img/travel/rome-lg.webp" data-caption="when in rome…">
+          <picture>
+            <source type="image/webp" srcset="assets/img/travel/rome-sm.webp 900w, assets/img/travel/rome-lg.webp 1800w" sizes="(max-width: 809px) 90vw, 260px">
+            <img src="assets/img/travel/rome-lg.jpg" alt="when in rome…" loading="lazy" decoding="async">
+          </picture>
+        </button>
+        <figcaption>when in rome…</figcaption>
+      </figure>
+      <figure class="stamp">
+        <button class="stamp__photo" type="button" data-full="assets/img/travel/prague-lg.webp" data-caption="prague, from the castle steps">
+          <picture>
+            <source type="image/webp" srcset="assets/img/travel/prague-sm.webp 900w, assets/img/travel/prague-lg.webp 1800w" sizes="(max-width: 809px) 90vw, 260px">
+            <img src="assets/img/travel/prague-lg.jpg" alt="prague, from the castle steps" loading="lazy" decoding="async">
+          </picture>
+        </button>
+        <figcaption>prague, from the castle steps</figcaption>
+      </figure>
+      <figure class="stamp">
+        <button class="stamp__photo" type="button" data-full="assets/img/travel/london-lg.webp" data-caption="the phone booth didn't work">
+          <picture>
+            <source type="image/webp" srcset="assets/img/travel/london-sm.webp 900w, assets/img/travel/london-lg.webp 1800w" sizes="(max-width: 809px) 90vw, 260px">
+            <img src="assets/img/travel/london-lg.jpg" alt="the phone booth didn't work" loading="lazy" decoding="async">
+          </picture>
+        </button>
+        <figcaption>the phone booth didn't work :( </figcaption>
+      </figure>
+    </div>
+    <button class="deck__toggle" type="button" data-deck-toggle aria-expanded="false">
+        <span>click for travel pics!</span> <span class="deck__arrow" aria-hidden="true">&rarr;</span>
+      </button>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ============ experience ============ -->
+<section class="shell section" id="experience">
+  <div class="section-head" data-reveal>
+    <h2 class="section-label">Experience</h2>
+  </div>
+
+  <ol class="rail">
+    <li class="rail__item" data-reveal>
+      <p class="rail__date">Sept 2025 — July 2026</p>
+      <div class="rail__body">
+        <h3 class="rail__role">Data Engineering &amp; AI Associate</h3>
+        <p class="rail__org">Kubrick Group — New York</p>
+        <p class="rail__note"> At Kubrick, I completed a dual training program in data and AI engineering, then applied my learnings to project work for a global bank. I helped build a proof-of-concept metadata synchronization service that kept two data platforms, Starburst and Collibra, in agreement over both their REST APIs. Because the two stayed in sync automatically, teams could stop hand-reconciling metadata 
+          and pinging each other to confirm which platform was right. We projected that roughly two hours of manual reconciliation will be saved per data product, per week.
+        </p>
+      </div>
+    </li>
+    <li class="rail__item" data-reveal>
+      <p class="rail__date">June — Aug 2024</p>
+      <div class="rail__body">
+        <h3 class="rail__role">Data Analyst Intern</h3>
+        <p class="rail__org">Chubb — Jersey City</p>
+        <p class="rail__note">My first time working at an insurer, and with real-world messy data. 
+          It taught me a lot about the unappreciated part of data analytics: understanding requirements, gathering the data, and cleaning it.
+          I ran exploratory analysis on 2M+ claims records scattered across legacy source systems, fixing data quality problems for downstream uses.
+          Afterward, I constructed preprocessing pipelines to restructure raw transaction logs into time series, and prototyped k-means segmentation on payment behavior by region, severity and claim type. 
+          The findings mapped to a 2–3% reserve accuracy gain across $19B in personal lines.</p>
+      </div>
+    </li>
+    <li class="rail__item" data-reveal>
+      <p class="rail__date">Oct 2023 — June 2024</p>
+      <div class="rail__body">
+        <h3 class="rail__role">Strategy Consultant</h3>
+        <p class="rail__org">180 Degrees Consulting — Greater London</p>
+        <p class="rail__note">Two engagements while I was studying in London: a relocation and market-expansion strategy for a historical and cultural museum, and product strategy for a global meat substitute company.</p>
+      </div>
+    </li>
+    <li class="rail__item" data-reveal>
+      <p class="rail__date">June — Aug 2023</p>
+      <div class="rail__body">
+        <h3 class="rail__role">Accounting Analyst Intern</h3>
+        <p class="rail__org">International Rescue Committee — New York</p>
+        <p class="rail__note">My first exposure to corporate finance at a non-profit organization! I reconciled balance sheets across IRC's international entities and flagged intercompany discrepancies.</p>
+      </div>
+    </li>
+    <li class="rail__item" data-reveal>
+      <p class="rail__date">Jan 2022 — Nov 2025</p>
+      <div class="rail__body">
+        <h3 class="rail__role">Campus roles</h3>
+        <p class="rail__org">Hamilton College</p>
+        <ul class="rail__points">
+        <li><em>QSR Center Economics Tutor</em>: helped students through analytical coursework in economics, in drop-in sessions and facilitated study groups.</li>
+        <li><em>Connect Team Associate</em>: organized alumni networking events across business, STEM and life skills.</li>
+        <li><em>Handshake Data &amp; Analytics Administrator</em>: reconciled weekly counselor meeting and event attendance records.</li>
+        <li><em>Annual Fund Associate</em>: alumni fundraising outreach by phone.</li>
+        </ul>
+      </div>
+    </li>
+  </ol>
+
+</section>
+
+<!-- ============ work ============ -->
+<section class="band" id="work">
+  <div class="shell section">
+    <div class="section-head" data-reveal>
+      <h2 class="section-label">Selected work</h2>
+    </div>
+
+    <div class="work__grid">
+
+    <a class="card" href="https://github.com/wjiang4318/Steam-Storefront-Health" target="_blank" rel="noopener" data-reveal style="--delay:0ms">
+        <span class="card__art">
+          <picture>
+            <source type="image/webp" srcset="assets/img/project/steam-sm.webp 373w, assets/img/project/steam-lg.webp 746w" sizes="(max-width: 809px) 90vw, 373px">
+            <img src="assets/img/project/steam-lg.webp" alt="Steam storefront health" width="746" height="560" loading="lazy" decoding="async">
+          </picture>
+        </span>
+        <span class="card__title">Steam storefront health</span>
+        <span class="card__kind">Pipeline</span>
+      </a>
+
+    <a class="card" href="https://medium.com/@wjiang4318/what-i-learned-building-and-stress-testing-an-ml-reserving-pipeline-3d35e20a33ef" target="_blank" rel="noopener" data-reveal style="--delay:60ms">
+        <span class="card__art">
+          <picture>
+            <source type="image/webp" srcset="assets/img/project/reserving-sm.webp 373w, assets/img/project/reserving-lg.webp 746w" sizes="(max-width: 809px) 90vw, 373px">
+            <img src="assets/img/project/reserving-lg.webp" alt="Snapshot triangle reserving" width="746" height="560" loading="lazy" decoding="async">
+          </picture>
+        </span>
+        <span class="card__title">Snapshot triangle reserving</span>
+        <span class="card__kind">Machine learning</span>
+      </a>
+
+    <a class="card" href="https://github.com/wjiang4318/senior-econ-thesis-work-on-your-own-terms" target="_blank" rel="noopener" data-reveal style="--delay:120ms">
+        <span class="card__art">
+          <picture>
+            <source type="image/webp" srcset="assets/img/project/thesis-sm.webp 373w, assets/img/project/thesis-lg.webp 746w" sizes="(max-width: 809px) 90vw, 373px">
+            <img src="assets/img/project/thesis-lg.webp" alt="Alternative work and job satisfaction" width="746" height="560" loading="lazy" decoding="async">
+          </picture>
+        </span>
+        <span class="card__title">Alternative work &amp; job satisfaction</span>
+        <span class="card__kind">Thesis</span>
+      </a>
+
+    <a class="card" href="https://github.com/wjiang4318/Climate-Change-on-Extreme-Weather" target="_blank" rel="noopener" data-reveal style="--delay:180ms">
+        <span class="card__art">
+          <picture>
+            <source type="image/webp" srcset="assets/img/project/climate-sm.webp 373w, assets/img/project/climate-lg.webp 746w" sizes="(max-width: 809px) 90vw, 373px">
+            <img src="assets/img/project/climate-lg.webp" alt="Climate change on extreme weather" width="746" height="560" loading="lazy" decoding="async">
+          </picture>
+        </span>
+        <span class="card__title">Climate change on extreme weather</span>
+        <span class="card__kind">Statistical modelling</span>
+      </a>
+
+    <a class="card" href="https://github.com/wjiang4318/Expense-Tracker" target="_blank" rel="noopener" data-reveal style="--delay:240ms">
+        <span class="card__art">
+          <picture>
+            <source type="image/webp" srcset="assets/img/project/expense-tracker-sm.webp 373w, assets/img/project/expense-tracker-lg.webp 746w" sizes="(max-width: 809px) 90vw, 373px">
+            <img src="assets/img/project/expense-tracker-lg.webp" alt="Expense tracker app" width="746" height="560" loading="lazy" decoding="async">
+          </picture>
+        </span>
+        <span class="card__title">Expense tracker app</span>
+        <span class="card__kind">Full-stack Application</span>
+      </a>
+
+    <a class="card" href="#case-munch-market" data-case-open="munch-market" data-reveal style="--delay:300ms">
+        <span class="card__art">
+          <picture>
+            <source type="image/webp" srcset="assets/img/project/munch-market-sm.webp 373w, assets/img/project/munch-market-lg.webp 746w" sizes="(max-width: 809px) 90vw, 373px">
+            <img src="assets/img/project/munch-market-lg.webp" alt="Munch Market" width="746" height="560" loading="lazy" decoding="async">
+          </picture>
+        </span>
+        <span class="card__title">Munch Market</span>
+        <span class="card__kind">Case study</span>
+      </a>
+</div>
+  </div>
+</section>
+
+<!-- ============ contact ============ -->
+<section class="shell section contact" id="contact">
+  <div class="contact__inner">
+    <h2 class="section-label" data-reveal>Get in touch</h2>
+    <p class="lede" data-reveal style="--delay:120ms">I'm looking for data engineering and analytics roles. Say hello. I'd love to connect.</p>
+  </div>
+
+  <div class="contact__rows" data-reveal style="--delay:160ms">
+    <a class="contact__row" href="mailto:wjiang4318@gmail.com">
+      <span class="contact__label">Email</span><span class="contact__value">wjiang4318@gmail.com</span>
+    </a>
+    <a class="contact__row" href="https://www.linkedin.com/in/jiangwilson" target="_blank" rel="noopener">
+      <span class="contact__label">LinkedIn</span><span class="contact__value">linkedin.com/in/jiangwilson</span>
+    </a>
+    <a class="contact__row" href="https://github.com/wjiang4318" target="_blank" rel="noopener">
+      <span class="contact__label">GitHub</span><span class="contact__value">github.com/wjiang4318</span>
+    </a>
+    <a class="contact__row" href="assets/resume.pdf" target="_blank" rel="noopener">
+      <span class="contact__label">Résumé</span><span class="contact__value">resume.pdf</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="shell footer__inner">
+    <span>© 2026 Wilson Jiang</span>
+    <span>New York, NY</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<template data-case="munch-market" data-title="Munch Market">
+  <article class="case">
+    <header class="case__masthead">
+      <p class="case__eyebrow">Case study · Kubrick Group · 2026</p>
+      <h2 class="case__title">Munch Market</h2>
+      <p class="case__lede">A simulated analytics engagement for a food delivery marketplace, run as a team capstone at Kubrick. I acted as a scrum master and developer, which meant I owned the daily standup and the translation between what stakeholders asked for and what went into the backlog. </p>
+    </header>
+
+    <div class="case__body">
+      <section class="case__section">
+        <h3>Discovery</h3>
+        <div class="case__prose">
+          <p>Three stakeholders meant three different requirements. The Delivery VP wanted everything to do with riders: hiring, managing, incentivizing. The Restaurant Manager wanted reporting on which restaurant partners were submitting unusable data. The Head of Analytics wanted to understand how the pipelines ran and how they would be maintained.</p>
+          <p>Most of my work was running those conversations, gathering requirements, and converting them into something a sprint could actually absorb.</p>
+        </div>
+      </section>
+
+      <section class="case__section">
+        <h3>Pipeline and dashboards</h3>
+        <div class="case__prose">
+          <p>Order, rider, and restaurant data landed from separate sources. My team and I built Databricks pipelines in Spark, writing to Delta Lake, that took the raw multi-source records through cleaning and conformance into analytics-ready tables. Delta tables with MERGE, orchestrated by Lakeflow Jobs, kept reruns cheap and idempotent. A corrected source could be reprocessed without duplicating rows or rebuilding everything downstream.</p>
+          <p>The output went into Power BI dashboards built for executive review: restaurant KPIs for the Restaurant Manager, and order-level retention broken out by rider.</p>
+        </div>
+      </section>
+
+      <p class="case__footnote">Internal Kubrick training, hence no public repo.</p>
+    </div>
+      </section>
+    </div>
+  </article>
+</template>
+
+
+<dialog class="window" data-case-window aria-label="Case study">
+  <div class="window__bar">
+    <p class="eyebrow" data-case-eyebrow></p>
+    <button class="window__close" type="button" data-case-close>
+      <span>Back to the page</span> <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="window__body" data-case-slot></div>
+</dialog>
+
+<dialog class="window" data-gallery aria-label="Travel pics">
+  <div class="window__bar">
+    <p class="eyebrow">Travel pics</p>
+    <button class="window__close" type="button" data-gallery-close>
+      <span>Back to the page</span> <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="window__body" data-gallery-slot></div>
+
+  <figure class="viewer" data-viewer hidden>
+    <button class="viewer__back" type="button" data-viewer-back>&larr; All photos</button>
+    <img alt="">
+    <figcaption></figcaption>
+  </figure>
+</dialog>
+
+<script src="assets/js/script.js" defer></script>
+</body>
+</html>
